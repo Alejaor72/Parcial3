@@ -1,6 +1,8 @@
 import "./components/export"
 import { dispatch } from "./store";
 import { getProducts } from "./store/actions";
+import { Product } from "./types/products";
+import Firebase from "./utils/firebase";
 
 class AppContainer extends HTMLElement {
     constructor() {

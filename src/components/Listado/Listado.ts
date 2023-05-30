@@ -3,6 +3,7 @@ import style from "./style.css";
 
 
 
+
 class RecetasList extends HTMLElement {
     constructor() {
       super();
@@ -25,12 +26,12 @@ class RecetasList extends HTMLElement {
           const pingredient = this.ownerDocument.createElement("p");
           pingredient.textContent =p.ingredient;
 
-          //const pimage = this.ownerDocument.createElement("img");
-          //pimage.innerHTML = p.image;
+          const pimage = this.ownerDocument.createElement("img");
+          pimage.textContent =p.file;
 
           pcontainer?.appendChild(ptitle);
           pcontainer?.appendChild(pingredient);
-          //pcontainer?.appendChild(pimage);
+          pcontainer?.appendChild(pimage);
           this.shadowRoot?.appendChild(pcontainer);
       })
         //

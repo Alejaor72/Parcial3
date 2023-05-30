@@ -1,6 +1,8 @@
 import { dispatch } from "../../store";
 import { saveProduct } from "../../store/actions";
 import { Product } from "../../types/product";
+import Firebase from "../../utils/firebase";
+import { getStorage, ref } from "firebase/storage";
 import style from "./style.css";
 
 const userInputs: Product = {
@@ -42,6 +44,14 @@ class Recetas extends HTMLElement {
         //console.log(e.target.value);
         //userInputs.image= e.target.value;
       //})
+
+      const iImg = this.ownerDocument.createElement("input");
+      iImg.type = "file";
+      iImg.addEventListener("change", () => {
+        const file = iImg.files?.[0];
+        if (file) Firebase.uploadFile(file);
+      });
+      this.shadowRoot?.appendChild(iImg);
 
       const btn = this.ownerDocument.createElement("button");
       btn.textContent="save"

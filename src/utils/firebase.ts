@@ -3,10 +3,18 @@ import firebaseConfig from "../firebaseConfig";
 import { Product } from "../types/product";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { saveProduct } from "../store/actions";
+import { getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
+const uploadFile = async (file: File) => {
+    const storageRef = ref(storage, file.name);
+    const res = await uploadBytes(storageRef, file);
+    console.log("file uploaded", res);
+};
 
 const saveProductInDB = async (product: Product) => {
     try {
@@ -28,5 +36,5 @@ const getProductsFromDB = async (): Promise<Product[]> =>{
   return resp;
 };
 
-export default {saveProductInDB,getProductsFromDB}
+export default {saveProductInDB,getProductsFromDB, uploadFile}
 
